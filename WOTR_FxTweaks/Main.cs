@@ -6,6 +6,7 @@ using System.Reflection;
 using UnityModManagerNet;
 using HarmonyLib;
 using Newtonsoft.Json.Linq;
+using WOTR_FxTweaks.Config;
 
 namespace WOTR_FxTweaks
 {
@@ -26,6 +27,8 @@ namespace WOTR_FxTweaks
                 Logger = modEntry.Logger;
 
                 var harmony = new Harmony(modEntry.Info.Id);
+                ModSettings.ModEntry = modEntry;
+                ModSettings.LoadAllSettings();
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
             catch (Exception ex)

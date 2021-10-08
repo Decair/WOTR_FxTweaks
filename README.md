@@ -1,16 +1,24 @@
-# Buff Fx Tweaks
+# Buff FX Tweaks
 
-WOTR Mod which allows users to disable, and perhaps eventually tweak, FX effects of buffs.
+WOTR Mod which allows users to disable and to override FX effects of buffs.
 
-# How to install
+By default the mod disables the BlessingOfUnlife buff FX.  If you don't like this behavior, see How to Use for instructions around how to change DisableFx for BlessingOfUnlife from true to false.
+
+# How to Install
 
 0. Download the latest published zip file.
 1. Install [UnityModManager](https://www.nexusmods.com/site/mods/21)
 2. Install the zip with UnityModManager.
 
-# How to use
+# How to Use
 
-Ctrl + F10 to access the mod menu. Then simply navigate to the buff and enable or disable the FX as desired.  Visual effect changes should take place the next time the buff is cast or on reloading a save.
+Configure Buff FX Tweaks by editing the buffs.json file present in the UserSettings folder of the mod.
+
+To disable a buff FX, find the buff whose FX you wish to disable in buffs.json, and change DisableFx from false to true.
+
+To override a buff FX with a different FX, first determine the buff whose new FX you wish to have displayed in game (we'll call that the override buff) and find that in buffs.json.  Copy the id of the override buff.  Then find the buff whose FX you wish to replace in buffs.json.  Paste the id of the override buff into the value of OverrideFxId.
+
+Note that the most challenging part of configuring the mod is determining which named buff actually corresponds to the buff you're trying to tweak.  There are a lot of cloned buffs in WOTR blueprints.
 
 # How to Compile
 

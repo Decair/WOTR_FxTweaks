@@ -4,11 +4,8 @@
     </PropertyGroup>
 	
 	<PropertyGroup>
-		<LangVersion>8.0</LangVersion>
-	</PropertyGroup>
-	
-	<PropertyGroup>
 		<TargetFramework>net472</TargetFramework>
+		<LangVersion>8.0</LangVersion>
 		<AssemblyVersion>0.0.2.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
 		<Description></Description>
@@ -448,5 +445,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="xcopy &quot;$(ProjectDir)UserSettings&quot; &quot;$(TargetDir)UserSettings&quot; /e /y /i /r" />
+	</Target>
 </Project>
 
