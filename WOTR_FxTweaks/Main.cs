@@ -17,6 +17,8 @@ namespace WOTR_FxTweaks
         internal static void Error(string msg) => Logger?.Error(msg);
         internal static UnityModManager.ModEntry.ModLogger Logger { get; private set; }
 
+        public static bool Enabled = true;
+
         internal static bool Load(UnityModManager.ModEntry modEntry)
         {
             try
@@ -32,6 +34,12 @@ namespace WOTR_FxTweaks
                 throw;
             }
 
+            return true;
+        }
+
+        static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
+        {
+            Enabled = value;
             return true;
         }
     }

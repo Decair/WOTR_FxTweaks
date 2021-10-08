@@ -1,8 +1,8 @@
 {
 	"Id": "WOTR_FxTweaks",
-	"DisplayName": "WOTR_FxTweaks",
+	"DisplayName": "Buff FX Tweaks",
 	"Author": "Decair",
-	"Version": "0.0.1",
+	"Version": "1.0.0",
 	"ManagerVersion": "0.23.3",
 	"Requirements": [],
 	"AssemblyName": "WOTR_FxTweaks.dll",

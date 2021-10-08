@@ -1,6 +1,16 @@
-# WOTR_FxTweaks
+# Buff Fx Tweaks
 
-My Mod Description
+WOTR Mod which allows users to disable, and perhaps eventually tweak, FX effects of buffs.
+
+# How to install
+
+0. Download the latest published zip file.
+1. Install [UnityModManager](https://www.nexusmods.com/site/mods/21)
+2. Install the zip with UnityModManager.
+
+# How to use
+
+Ctrl + F10 to access the mod menu. Then simply navigate to the buff and enable or disable the FX as desired.  Visual effect changes should take place the next time the buff is cast or on reloading a save.
 
 # How to Compile
 
@@ -14,23 +24,15 @@ My Mod Description
 
 NOTE Unity Mod Manager and this mod template make use of [Harmony](https://go.microsoft.com/fwlink/?linkid=874338)
 
-# How to Debug
+# Links
 
-1. Open Pathfinder: WoTR game folder
-	* Rename Wrath.exe to Watch.exe.original
-	* Rename UnityPlayer.dll to UnityPlayer.dll.original
-	* Add below entries to *Wath_Data\boot.config*:
-		```
-		wait-for-managed-debugger=1
-		player-connection-debug=1
-		```
-2. Download and install [7zip](https://www.7-zip.org/a/7z1900-x64.exe)
-3. Download [Unity Editor 2019.4.0](https://download.unity3d.com/download_unity/0af376155913/Windows64EditorInstaller/UnitySetup64-2019.4.0f1.exe)
-4. Open Downloads folder
-	* Right-click UnitySetup64-2019.4.0f1.exe, 7Zip -> Extract Here
-	* Navigate to Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_development_mono
-		* Copy *UnityPlayer.dll* and *WinPixEventRuntime.dll* to clipboard
-	* Navigate to the Pathfinder: WoTR game folder
-		* Rename *UnityPlayer.dll* to *UnityPlayer.dll.original*
-		* Paste *UnityPlayer.dll* and *WinPixEventRuntime.dll* from clipboard
-5. You can now attach the Unity Debugger from Visual Studio 2019, Debug -> Attach Unity Debug
+Source code: https://github.com/Decair/WOTR_FxTweaks
+
+# Credits
+
+Thanks to:
+	- [ThyWoof's mod template, for an auto-setup template for WOTR mods](https://github.com/ThyWoof/PathfinderWoTRModTemplate).
+	- [Xenofell's Tweakable Weapon Categories mod, for getting me going way beyond the base template](https://github.com/cstamford/WOTR_TweakableWeaponCategories).
+	- [Vek17's TTT mod, for many examples of how to make certain types of changes](https://github.com/Vek17/WrathMods-TabletopTweaks).
+	- All the folks at Owlcat's Pathfinder WOTR discord #mod-dev-technical channel, for the multiple times they pointed me in the right direction (especially WittleFolfie - thank you!).
+
