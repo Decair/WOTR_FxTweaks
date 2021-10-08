@@ -31,8 +31,9 @@ Source code: https://github.com/Decair/WOTR_FxTweaks
 # Credits
 
 Thanks to:
-	- [ThyWoof's mod template, for an auto-setup template for WOTR mods](https://github.com/ThyWoof/PathfinderWoTRModTemplate).
-	- [Xenofell's Tweakable Weapon Categories mod, for getting me going way beyond the base template](https://github.com/cstamford/WOTR_TweakableWeaponCategories).
-	- [Vek17's TTT mod, for many examples of how to make certain types of changes](https://github.com/Vek17/WrathMods-TabletopTweaks).
-	- All the folks at Owlcat's Pathfinder WOTR discord #mod-dev-technical channel, for the multiple times they pointed me in the right direction (especially WittleFolfie - thank you!).
+
+0. [ThyWoof's mod template](https://github.com/ThyWoof/PathfinderWoTRModTemplate), for an auto-setup template for WOTR mods.
+1. [Xenofell's Tweakable Weapon Categories mod](https://github.com/cstamford/WOTR_TweakableWeaponCategories), for getting me going way beyond the base template.
+2. [Vek17's TTT mod](https://github.com/Vek17/WrathMods-TabletopTweaks), for many examples of how to make behavioral and blueprint changes.
+3. All the folks at Owlcat's Pathfinder WOTR discord #mod-dev-technical channel, for the multiple times they pointed me in the right direction (especially WittleFolfie - thank you!).
 
