@@ -1,0 +1,13 @@
+{
+	"Id": "WOTR_FxTweaks",
+	"DisplayName": "WOTR_FxTweaks",
+	"Author": "Decair",
+	"Version": "0.0.1",
+	"ManagerVersion": "0.23.3",
+	"Requirements": [],
+	"AssemblyName": "WOTR_FxTweaks.dll",
+	"EntryMethod": "WOTR_FxTweaks.Main.Load",
+	"Repository": "https://raw.githubusercontent.com/Decair/WOTR_FxTweaks/main/WOTR_FxTweaks/Repository.json",
+	"HomePage": "https://www.nexusmods.com/pathfinderwrathoftherighteous/mods/##"
+}
+
