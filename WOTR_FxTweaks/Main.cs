@@ -13,6 +13,7 @@ namespace WOTR_FxTweaks
     public class Main
     {
         [Conditional("DEBUG")]
+        internal static void DebugLog(string msg) => Logger.Log(msg);
         internal static void Log(string msg) => Logger.Log(msg);
         internal static void Error(Exception ex) => Logger?.Error(ex.ToString());
         internal static void Error(string msg) => Logger?.Error(msg);

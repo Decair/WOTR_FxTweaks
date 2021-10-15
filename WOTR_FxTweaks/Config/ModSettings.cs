@@ -12,6 +12,7 @@ namespace WOTR_FxTweaks.Config {
 		public string Id {get;set;}
 		public bool DisableFx {get;set;}
 		public string OverrideFxId {get;set;}
+        public bool IsMythicClassFx { get; set; }
     }
 
     static class ModSettings {
@@ -43,10 +44,6 @@ namespace WOTR_FxTweaks.Config {
                 .OrderBy(b => b.DisableFx)
 				.ToList();
             Main.Log($"Found {BuffsToTweak.Count} buffs to tweak.");
-            //foreach (Buff buffToTweak in BuffsToTweak)
-            //{
-            //    Main.Log("To tweak: " + buffToTweak.Name);
-            //}
         }
     }
 }

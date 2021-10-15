@@ -1,5 +1,7 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.Blueprints.Items.Ecnchantments;
 using Kingmaker.Blueprints.JsonSystem;
@@ -31,24 +33,52 @@ namespace WOTR_FxTweaks
             {
                 if (Initialized) return;
                 Initialized = true;
+                if (!Main.Enabled) { return; }
+                Main.Log("Initialize blueprint patching process...");
                 if (ModSettings.BuffsToTweak.Count > 0)
                 {
-                    if (!Main.Enabled) { return; }
-
-                    foreach (Buff buffToTweak in ModSettings.BuffsToTweak)
+                    Main.Log($"Tweaking {ModSettings.BuffsToTweak.Count} buffs.");
+                    try
                     {
-                        Main.Log("Tweaking: " + buffToTweak.Name);
-                        var BlueprintBuffToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(buffToTweak.Id);
-                        if (buffToTweak.DisableFx)
+                        foreach (Buff buffToTweak in ModSettings.BuffsToTweak)
                         {
-                            BlueprintBuffToTweak.FxOnStart = BlueprintBuffToTweak.FxOnRemove;
-                        } else
-                        {
-                            var OverrideBlueprintBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(buffToTweak.OverrideFxId);
-                            BlueprintBuffToTweak.FxOnStart = OverrideBlueprintBuff.FxOnStart;
+                            Main.DebugLog("Tweaking: " + buffToTweak.Name);
+                            if (buffToTweak.IsMythicClassFx)
+                            {
+                                var BlueprintClassToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>(buffToTweak.Id);
+                                var ClassWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>("0937bec61c0dabc468428f496580c721"); // Using Alchemist which is empty
+                                if (buffToTweak.DisableFx)
+                                {
+                                    BlueprintClassToTweak.m_AdditionalVisualSettings = ClassWithNullVisualSettingsFx.m_AdditionalVisualSettings;
+                                }
+                                else
+                                {
+                                    var OverrideBlueprintClass = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>(buffToTweak.OverrideFxId);
+                                    BlueprintClassToTweak.m_AdditionalVisualSettings = OverrideBlueprintClass.m_AdditionalVisualSettings;
+                                }
+                            }
+                            else
+                            {
+                                var BlueprintBuffToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(buffToTweak.Id);
+                                if (buffToTweak.DisableFx)
+                                {
+                                    BlueprintBuffToTweak.FxOnStart = BlueprintBuffToTweak.FxOnRemove;
+                                }
+                                else
+                                {
+                                    var OverrideBlueprintBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(buffToTweak.OverrideFxId);
+                                    BlueprintBuffToTweak.FxOnStart = OverrideBlueprintBuff.FxOnStart;
+                                }
+                            }
                         }
                     }
+                    catch (Exception e)
+                    {
+                        Main.Error("Failed Blueprint patching.");
+                        Main.Error(e.Message);
+                    }
                 }
+                Main.Log("Patching process complete.");
             }
         }
     }

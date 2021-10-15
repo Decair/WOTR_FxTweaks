@@ -1,4 +1,64 @@
 [{
+        "Name": "_AeonMythicClass",
+        "Id": "15a85e67b7d69554cab9ed5830d0268e",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_AngelMythicClass",
+        "Id": "a5a9fe8f663d701488bd1db8ea40484e",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_AzataMythicClass",
+        "Id": "9a3b2c63afa79744cbca46bea0da9a16",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_DemonMythicClass",
+        "Id": "8e19495ea576a8641964102d177e34b7",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_DevilMythicClass",
+        "Id": "211f49705f478b3468db6daa802452a2",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_GoldenDragonClass",
+        "Id": "daf1235b6217787499c14e4e32142523",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_LegendClass",
+        "Id": "3d420403f3e7340499931324640efe96",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_LichMythicClass",
+        "Id": "5d501618a28bdc24c80007a5c937dcb7",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_SwarmThatWalksClass",
+        "Id": "5295b8e13c2303f4c88bdb3d7760a757",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
+        "Name": "_TricksterMythicClass",
+        "Id": "8df873a8c6e48294abdb78c45834aa0a",
+        "DisableFx": false,
+        "OverrideFxId": "",
+        "IsMythicClassFx": true
+    }, {
         "Name": "AbjurationResistanceAcidBuff",
         "Id": "b87a0e8a961c63a44a952822fe975edb",
         "DisableFx": false,
@@ -166,6 +226,11 @@
     }, {
         "Name": "AngelSwordEffectBuff",
         "Id": "f5f500d6a2a39fc4181af32ad79af488",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "AngelSwordSpeedOfLightBuff",
+        "Id": "58d3b0b98ce4f9346b3c1fb4c7dbc9bf",
         "DisableFx": false,
         "OverrideFxId": ""
     }, {
@@ -716,6 +781,81 @@
     }, {
         "Name": "BrilliantInspirationBuff",
         "Id": "d389b135e67f7134c8d723e30a62c259",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsAngel",
+        "Id": "d596694ff285f3f429528547f441b1c0",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsAngelGhost",
+        "Id": "bd6980649fd60fa4085c34aa74ac47f2",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDemon",
+        "Id": "3c958be25ab34dc448569331488bee27",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDevil",
+        "Id": "38431e32f0e210342968d3a997eb233e",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicBlack",
+        "Id": "ddfe6e85e1eed7a40aa911280373c228",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicBlue",
+        "Id": "800cde038f9e6304d95365edc60ab0a4",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicBrass",
+        "Id": "7f5acae38fc1e0f4c9325d8a4f4f81fc",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicBronze",
+        "Id": "482ee5d001527204bb86e34240e2ce65",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicCopper",
+        "Id": "a25d6fc69cba80548832afc6c4787379",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicGold",
+        "Id": "984064a3dd0f25444ad143b8a33d7d92",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicGreen",
+        "Id": "a4ccc396e60a00f44907e95bc8bf463f",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicRed",
+        "Id": "08ae1c01155a2184db869e9ebedc758d",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicSilver",
+        "Id": "5a791c1b0bacee3459d7f5137fa0bd5f",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsDraconicWhite",
+        "Id": "381a168acd79cd54baf87a17ca861d9b",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
+        "Name": "BuffWingsMutagen",
+        "Id": "e4979934bdb39d842b28bee614606823",
         "DisableFx": false,
         "OverrideFxId": ""
     }, {
@@ -3309,6 +3449,11 @@
         "DisableFx": false,
         "OverrideFxId": ""
     }, {
+        "Name": "ProtectionFromSpellsBuffSpell",
+        "Id": "e9947402c84e8bc4e958b9be08d7a720",
+        "DisableFx": false,
+        "OverrideFxId": ""
+    }, {
         "Name": "ProtectionJudgmentBuff",
         "Id": "99345ce7c0f8001438fee23db660d039",
         "DisableFx": false,
@@ -3996,7 +4141,22 @@
     }, {
         "Name": "StoneskinBuff",
         "Id": "7aeaf147211349b40bb55c57fec8e28d",
-        "DisableFx": false,
+        "DisableFx": true,
+        "OverrideFxId": ""
+    }, {
+        "Name": "StoneskinBuffCL11",
+        "Id": "6215b25fbc1a36748b5606ebc0092074",
+        "DisableFx": true,
+        "OverrideFxId": ""
+    }, {
+        "Name": "StoneskinBuffLichImproved",
+        "Id": "e089f04285f995443a2e295d9b7a40e0",
+        "DisableFx": true,
+        "OverrideFxId": ""
+    }, {
+        "Name": "StoneskinCommunalBuff",
+        "Id": "714244637d461354b85b1808e7c6c814",
+        "DisableFx": true,
         "OverrideFxId": ""
     }, {
         "Name": "StormwalkerWeaponBuff",
