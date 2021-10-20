@@ -66,11 +66,11 @@ namespace WOTR_FxTweaks.Config {
 
                 buff = new Buff
                 {
-                    DisableFx = false,
-                    IsMythicClassFx = isClassFX,
+                    Name = name,
                     Id = id,
+                    DisableFx = false,
                     OverrideFxId = null,
-                    Name = name
+                    IsMythicClassFx = isClassFX
                 };
 
                 ModSettings.BuffsByID.Add(id, buff);

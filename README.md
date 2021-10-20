@@ -1,8 +1,8 @@
-# Buff FX Tweaks
+# FX Tweaks
 
-WOTR Mod which allows users to disable and to override FX effects of buffs.
+WOTR Mod which allows users to disable and to override visual effects of buffs and certain Mythic Classes.
 
-By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you don't like this behavior, see How to Use for instructions around how to change DisableFx for BlessingOfUnlife and the four Stoneskin buffs from true to false.
+By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you don't like this behavior, see How to Use for instructions around how to change this.
 
 # How to Install
 
@@ -12,27 +12,35 @@ By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you 
 
 # How to Use
 
-Configure Buff FX Tweaks by editing the Buffs.json file present in the UserSettings folder of the mod.
+A subset of FX Tweaks configuration is now supported in-game within WOTR's Options-->Graphics menu (scroll to the bottom). You **must restart WOTR** for changes to take effect.
 
-To disable an FX, find the buff whose FX you wish to disable in Buffs.json, and change DisableFx from false to true.
+As there are approaching 1000 FX that one can configure, users can fully configure FX Tweaks through direct editing of the Buffs.json file present in the UserSettings folder of the mod.  To configure via Buffs.json: 
+-  If this is a new install of FX Tweaks (vs. an upgrade), then you will need to launch WOTR prior to Buffs.json being geneterated and available for configuration.
+-  To disable an FX, find the effect whose FX you wish to disable in Buffs.json, and change DisableFx from false to true.
+-  To override an FX with a different FX, first determine the effect whose FX you wish to have displayed in game (we'll call that the override buff) and find that in Buffs.json. Copy the id of the override buff. Then find the effect whose FX you wish to replace in Buffs.json. Paste the id of the override buff into the value of OverrideFxId.
+    -  Only override the FX of a Mythic Class (denoted with "IsMythicClassFx = true", located at the beginning of buffs.json) with the FX of another Mythic Class. Similarly, only override the FX of a normal buff with another normal buff.
+-  The most challenging part of json configuration is determining which named FX actually corresponds to the FX you're trying to tweak. The naming standard was likely obvious to Owlcat developers, but that doesn't always translate well to us users.
 
-To override an FX with a different FX, first determine the buff whose FX you wish to have displayed in game (we'll call that the override buff) and find that in Buffs.json. Copy the id of the override buff. Then find the buff whose FX you wish to replace in Buffs.json. Paste the id of the override buff into the value of OverrideFxId.
+# Known Issues
 
-Notes:
--  Only override the FX of a Mythic Class (denoted with "IsMythicClassFx = true", located at the beginning of buffs.json) with the FX of another Mythic Class. Similarly, only override the FX of a normal buff (won't have an "IsMythicClassFx") with another normal buff.
--  The most challenging part of configuring the mod is determining which named buff actually corresponds to the buff you're trying to tweak. There are a lot of similar buffs in WOTR blueprints, so you may need to experiment a bit.
+-  The new in-game configuration experience is currently limited to english.
+-  The mechanism used to filter out non-player buffs (which created the Drezen issue in v1.0.0) may have been too restrictive.  If you notice any missing player buffs in Buffs.json, please create an issue in [github](https://github.com/Decair/WOTR_FxTweaks).  Note that it is intended that the in-game configuration UI does not include every tweakable buff and this won't change (not ever going to list 1000 FX in said UI).
+-  There are some visual effects (I'm looking at you Enlarge and Polymorph) which are only partially implemented by Owlcat's buff FX, where the remainder of the effect involves things like changing the base character scale and/or model. Currently FX Tweaks cannot override changes to a character's model or scale. I may add this in the future, but note that the Visual Adjustments mod does give you a ton of control over the visual appearance of your characters and can override any model or scale changes made by spells or abilities.
 
 # Q & A
-**Q:** Do I always need to replace Buffs.json or can I continue to use my previous one?  
-**A:** I will always try to make non-breaking changes (so things should be additive).  The change from v1.0.0 to v1.0.1 was an exception as it intentionally removes buffs which were creating an issue.  That said, you obviously can't disable / override newly added buffs without them being present in Buffs.json. To keep using your old Buffs.json, prior to an update please copy the old Buffs.json to a new name/location; then after the update you can overwrite the Buffs.json included in the update.
-
-**Q:** On an update, can I just add select json objects / buffs vs. replacing the entire Buffs.json?  
-**A:** Yep, this currently works fine. You obviously need an understanding of how to edit json, as the mod won't work if you create malformed json.
-
-**Q:** Having to possibly re-edit my json changes on an update sucks. Is there an easier way?  
-**A:** Yeah, I don't like this either. I'm evaluating how to best migrate settings from earlier versions into new ones, and hope to support this in a future release.
+**Q:** What will happen when I migrate from an older version to this new version?  
+**A:** FX Tweaks will read any existing Buffs.json found in the UserSettings folder of the mod and import any previous DisableFx and OverrideFxId settings for currently supported FX. Buffs.json will then be overwritten to add any newly supported FX and other settings changes. So it is expected that FX Tweaks will keep what you'd configured previously (so long as the specific FX tweak remains supported). You may want to update your Buffs.json should you wish to tweak any newly supported FX.  See Change List to understand whether new FX have been added between the current version and the version you're upgrading from.
  
 # Change List
+### v1.2.0
+**New Feature:** *With many thanks to Bubbles who added this functionality, you can now configure some of the more common tweaks within the in-game Options-->Graphics menu (scroll to the bottom).* Configuration through Buffs.json will continue to provide much more functionality and flexibility. Note that you **must restart WOTR** for changes to take effect.
+
+**New Feature:** *Buffs.json setting management has changed to support migration of previous settings.* To support this, the mod no longer ships with a Buffs.json, and the game must be launched at least once to generate Buffs.json.
+
+Fixed a rare mod-conflict which enabled another mod to break FX Tweaks' json parsing due to leveraging shared serialization settings.
+
+v1.2.0 should be compatible with the latest Beta and Release versions of WOTR (so both v1.0.9 and 1.1.0).  If you notice an issue, please create an issue on [github](https://github.com/Decair/WOTR_FxTweaks).
+
 ### v1.1.0
 **New Feature:** *You can now disable and override FX for the visual changes stemming from your Mythic Path choices. For example, you can disable or override the visual change from being a Lich.*
 
@@ -66,8 +74,9 @@ Source code: https://github.com/Decair/WOTR_FxTweaks
 
 Thanks to:
 
-1. [ThyWoof's mod template](https://github.com/ThyWoof/PathfinderWoTRModTemplate), for an auto-setup template for WOTR mods.
-2. [Xenofell's Tweakable Weapon Categories mod](https://github.com/cstamford/WOTR_TweakableWeaponCategories), for getting me going way beyond the base template.
-3. [Vek17's TTT mod](https://github.com/Vek17/WrathMods-TabletopTweaks), for many examples of how to make behavioral and blueprint changes.
-4. All the folks at Owlcat's Pathfinder WOTR discord #mod-dev-technical channel, for the multiple times they pointed me in the right direction (especially WittleWolfie - thank you!).
+1. Bubbles, who created the awesome snazzy in-game UI for FX Tweaks!
+2. [ThyWoof's mod template](https://github.com/ThyWoof/PathfinderWoTRModTemplate), for an auto-setup template for WOTR mods.
+3. [Xenofell's Tweakable Weapon Categories mod](https://github.com/cstamford/WOTR_TweakableWeaponCategories), for getting me going way beyond the base template.
+4. [Vek17's TTT mod](https://github.com/Vek17/WrathMods-TabletopTweaks), for many examples of how to make behavioral and blueprint changes.
+5. All the folks at Owlcat's Pathfinder WOTR discord #mod-dev-technical channel, for the multiple times they pointed me in the right direction (especially WittleWolfie - thank you!).
 
