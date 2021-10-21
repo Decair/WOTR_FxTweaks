@@ -74,8 +74,8 @@ namespace WOTR_FxTweaks
                     }
                     catch (Exception e)
                     {
-                        Main.Error("Failed Blueprint patching.");
                         Main.Error(e.Message);
+                        Main.Error("Failed Blueprint patching.");
                     }
                 }
                 Main.Log("Patching process complete.");

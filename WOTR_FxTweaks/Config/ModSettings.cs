@@ -276,8 +276,8 @@ namespace WOTR_FxTweaks.Config {
                     }
                     catch (Exception e)
                     {
-                        Main.Error("Unable to parse user settings (Buffs.json). Malformed json? Archiving settings contents to BROKEN_Buffs.json. Settings will be rebuilt using defaults.");
                         Main.Error(e.Message);
+                        Main.Error("Unable to parse user settings (Buffs.json). Malformed json? Archiving settings contents to BROKEN_Buffs.json. Settings will be rebuilt using defaults.");
                         try
                         {
                             File.Copy(SettingsPath("Buffs.json"), SettingsPath("BROKEN_Buffs.json"), true);
