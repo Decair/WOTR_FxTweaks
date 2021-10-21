@@ -52,6 +52,8 @@ As there are approaching 1000 FX that one can configure, users can fully configu
 
 Fixed a rare mod-conflict which enabled another mod to break FX Tweaks' json parsing due to leveraging shared serialization settings.
 
+Updated the mod name from Buff FX Tweaks to just FX Tweaks, as it's been broadening beyond just the buffs it handed in v1.0.0.
+
 v1.2.0 should be compatible with the latest Beta and Release versions of WOTR (so both v1.0.9 and 1.1.0).  If you notice an issue, please create an issue on [github](https://github.com/Decair/WOTR_FxTweaks).
 
 ### v1.1.0
