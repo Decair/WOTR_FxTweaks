@@ -64,6 +64,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="UserSettings\Buffs.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="UserSettings\Buffs.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Reference Include="Owlcat.Runtime.Core.dll">
 			<HintPath>$([System.IO.Path]::Combine($(WrathInstallDir), 'Wrath_Data\Managed\Owlcat.Runtime.Core.dll'))</HintPath>
 			<Private>false</Private>
@@ -446,8 +454,8 @@
 		</None>
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="xcopy &quot;$(ProjectDir)UserSettings&quot; &quot;$(TargetDir)UserSettings&quot; /e /y /i /r" />
+	<Target Name="MakeSettingsDir" AfterTargets="PostBuildEvent">
+		<MakeDir Directories="$(TargetDir)UserSettings" Condition="!Exists('$(TargetDir)UserSettings')" />
 	</Target>
 </Project>
 

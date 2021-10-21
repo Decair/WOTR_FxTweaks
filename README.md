@@ -1,6 +1,6 @@
 # FX Tweaks
 
-WOTR Mod which allows users to disable and to override visual effects of buffs and certain Mythic Classes.
+WOTR Mod which allows users to disable and to override ongoing effects (FX) of buffs and certain Mythic Classes.
 
 By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you don't like this behavior, see How to Use for instructions around how to change this.
 
@@ -12,13 +12,20 @@ By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you 
 
 # How to Use
 
-A subset of FX Tweaks configuration is now supported in-game within WOTR's Options-->Graphics menu (scroll to the bottom). You **must restart WOTR** for changes to take effect.
+A subset of FX Tweaks configuration is now supported in-game within WOTR's Settings-->Graphics menu (scroll to the bottom). You **must restart WOTR** for changes to take effect.
 
 As there are approaching 1000 FX that one can configure, users can fully configure FX Tweaks through direct editing of the Buffs.json file present in the UserSettings folder of the mod.  To configure via Buffs.json: 
 -  If this is a new install of FX Tweaks (vs. an upgrade), then you will need to launch WOTR prior to Buffs.json being geneterated and available for configuration.
 -  To disable an FX, find the effect whose FX you wish to disable in Buffs.json, and change DisableFx from false to true.
 -  To override an FX with a different FX, first determine the effect whose FX you wish to have displayed in game (we'll call that the override buff) and find that in Buffs.json. Copy the id of the override buff. Then find the effect whose FX you wish to replace in Buffs.json. Paste the id of the override buff into the value of OverrideFxId.
     -  Only override the FX of a Mythic Class (denoted with "IsMythicClassFx = true", located at the beginning of buffs.json) with the FX of another Mythic Class. Similarly, only override the FX of a normal buff with another normal buff.
+-  To add an unsupported buff FX:  
+    -  First you'll need the id for the buff (the Toybox mod is a good source for this)
+	-  Then clone an existing buff object in Buffs.json, replacing the Name and Id with the new values
+	-  Set IsMythicClassFx to false (as this is a buff)
+	-  As this isn't a supported buff, also set ProcessEvenIfUnsupported to true (without doing this FX Tweaks will ignore it as unsupported)
+	-  Configure DisableFx or OverrideFxId as desired
+	-  Profit.  Although do note that disabling an FX which isn't a typical player initiated buff may result in crashes (especially when entering towns like Drezen). Save early and often.
 -  The most challenging part of json configuration is determining which named FX actually corresponds to the FX you're trying to tweak. The naming standard was likely obvious to Owlcat developers, but that doesn't always translate well to us users.
 
 # Known Issues
@@ -28,12 +35,18 @@ As there are approaching 1000 FX that one can configure, users can fully configu
 -  There are some visual effects (I'm looking at you Enlarge and Polymorph) which are only partially implemented by Owlcat's buff FX, where the remainder of the effect involves things like changing the base character scale and/or model. Currently FX Tweaks cannot override changes to a character's model or scale. I may add this in the future, but note that the Visual Adjustments mod does give you a ton of control over the visual appearance of your characters and can override any model or scale changes made by spells or abilities.
 
 # Q & A
+**Q:** If I'm migrating from v1.0.0, can I keep my existing Buffs.json?  
+**A:** You can, but its absolutely not recommended. There are a lot of FX described in that settings file which can cause your game to crash if disabled. The recommended upgrade path here is to delete the existing v1.0.0 Buffs.json and to do a clean install of the latest version.
+
 **Q:** What will happen when I migrate from an older version to this new version?  
 **A:** FX Tweaks will read any existing Buffs.json found in the UserSettings folder of the mod and import any previous DisableFx and OverrideFxId settings for currently supported FX. Buffs.json will then be overwritten to add any newly supported FX and other settings changes. So it is expected that FX Tweaks will keep what you'd configured previously (so long as the specific FX tweak remains supported). You may want to update your Buffs.json should you wish to tweak any newly supported FX.  See Change List to understand whether new FX have been added between the current version and the version you're upgrading from.
+
+**Q:** What will happen if I have unsupported FX configured in Buffs.json when I migrate from an older version to this new version?  
+**A:** FX Tweaks will attempt to protect you from unsupported FX as they can cause the game to crash, and the v1.0.0 version of Buffs.json included definitions for these FX. It will still import these FX, but will flag them as unsupported (you can identify these as they'll have a property of IsSupported = false). By default, FX Tweaks will ignore any unsupported FX. This behavior can be overriden by setting ProcessEvenIfUnsupported to true for any unsupported FX you're sure will not cause a crash (or which you're willing to roll the dice on).
  
 # Change List
 ### v1.2.0
-**New Feature:** *With many thanks to Bubbles who added this functionality, you can now configure some of the more common tweaks within the in-game Options-->Graphics menu (scroll to the bottom).* Configuration through Buffs.json will continue to provide much more functionality and flexibility. Note that you **must restart WOTR** for changes to take effect.
+**New Feature:** *With many thanks to Bubbles who added this functionality, you can now configure some of the more common tweaks within the in-game Settings-->Graphics menu (scroll to the bottom).* Configuration through Buffs.json will continue to provide much more functionality and flexibility. Note that you **must restart WOTR** for changes to take effect.
 
 **New Feature:** *Buffs.json setting management has changed to support migration of previous settings.* To support this, the mod no longer ships with a Buffs.json, and the game must be launched at least once to generate Buffs.json.
 
@@ -47,7 +60,7 @@ v1.2.0 should be compatible with the latest Beta and Release versions of WOTR (s
 The fix for Drezen in 1.0.1 missed including some player buffs. It's unclear which, so please let me know in WOTR Discord should you find something you need missing. Found the following buffs missing and added them back to Buffs.json: Angel Sword Speed of Light, various Wings buffs, Protection from Spells, and certain Stoneskin variations.
 
 ### v1.0.1
-v1.0.0 supported over 4600 buffs, player and non-player, but disabling certain non-player buffs resulted in a crash entering Drezen. Addresses the issue by reducing the list to only player buffs.
+v1.0.0 supported over 4600 buffs, player and non-player, but disabling certain non-player buffs resulted in a crash entering certain locations like Drezen. Addresses the issue by reducing the list to only player buffs.
 
 Please ensure that you're replacing your Buffs.json file with the one from this release and updating that new Buffs.json file with any tweaks you wish to make. Apologies for the inconvenience.
 
