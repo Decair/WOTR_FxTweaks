@@ -276,7 +276,7 @@ namespace WOTR_FxTweaks.Config {
                     }
                     catch (Exception e)
                     {
-                        Main.Error("Unable to parse user settings (Buffs.json). Malformed json? Archiving settings contents to BROKEN_Buffs.json. Settings will be rebuilt.");
+                        Main.Error("Unable to parse user settings (Buffs.json). Malformed json? Archiving settings contents to BROKEN_Buffs.json. Settings will be rebuilt using defaults.");
                         Main.Error(e.Message);
                         try
                         {
@@ -289,7 +289,7 @@ namespace WOTR_FxTweaks.Config {
                     }
                 } else
                 {
-                    Main.Log("Unable to load user settings (Buffs.json). Settings will be rebuilt.");
+                    Main.Log("No previous user settings (Buffs.json) found. Using default settings.");
                 }
 
                 // Load list we use for processing buffs, sorting so that we handling overrides prior to FX removal
