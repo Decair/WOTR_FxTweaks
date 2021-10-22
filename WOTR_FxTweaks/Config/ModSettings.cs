@@ -56,6 +56,7 @@ namespace WOTR_FxTweaks.Config {
 
             if (!ModSettings.BuffsByID.TryGetValue(id, out var buff))
             {
+                Main.Error($"Could not find Buff {id} when creating in-game UI. Attempting to recreate buff.");
                 var blueprint = ResourcesLibrary.TryGetBlueprint(BlueprintGuid.Parse(id));
                 bool isClassFX = false;
                 if (blueprint is BlueprintBuff)
@@ -204,7 +205,7 @@ namespace WOTR_FxTweaks.Config {
             }
         }
 
-        private static JsonSerializerSettings writeSettings = new JsonSerializerSettings
+        private static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
             CheckAdditionalContent = false,
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -216,12 +217,11 @@ namespace WOTR_FxTweaks.Config {
             NullValueHandling = NullValueHandling.Ignore,
             ObjectCreationHandling = ObjectCreationHandling.Replace,
             StringEscapeHandling = StringEscapeHandling.Default,
-
         };
 
         public static void WriteBuffList(List<Buff> buffList)
         {
-            var serializer = JsonSerializer.Create(writeSettings);
+            var serializer = JsonSerializer.Create(SerializerSettings);
             var path = SettingsPath("Buffs.json");
 
             Main.Log("Persisting updated settings.");
@@ -236,19 +236,33 @@ namespace WOTR_FxTweaks.Config {
         public static void LoadAllSettings()
         {
             Main.Log("Processing user settings.");
+            var serializer = JsonSerializer.Create(SerializerSettings);
+            JsonReader reader = null;
+
+            if (TryReadSettingsFile("Debug.json", out var fileDebugAsJson))
+            {
+                Main.EnableDebugLogging = true;
+                Main.Log("Debug logging enabled.");
+            }
+
             if (TryReadSettingsResource("Buffs.json", out var resourceSettingsAsJson))
             {
                 // Load supported FX from resource and add to dictionary
-                Buffs = JsonConvert.DeserializeObject<List<Buff>>(resourceSettingsAsJson);
+                reader = new JsonTextReader(new StringReader(resourceSettingsAsJson));
+                Buffs = serializer.Deserialize<List<Buff>>(reader);
+                Main.DebugLog("Loaded Buffs from resource.");
                 foreach (var buff in Buffs)
                     BuffsByID.Add(buff.Id, buff);
+                Main.DebugLog("Loaded dictionary from Buffs.");
 
                 // Read from settings file, override defaults, add unsupported (ie. user added via file)
                 if (TryReadSettingsFile("Buffs.json", out var fileSettingsAsJson))
                 {
+                    Main.DebugLog("Found file Buffs.json. Updating Buffs with user settings.");
                     try
                     {
-                        var buffsFromFile = JsonConvert.DeserializeObject<List<Buff>>(fileSettingsAsJson);
+                        reader = new JsonTextReader(new StringReader(fileSettingsAsJson));
+                        var buffsFromFile = serializer.Deserialize<List<Buff>>(reader);
                         foreach (var fbuff in buffsFromFile)
                         {
                             if (BuffsByID.TryGetValue(fbuff.Id, out var mbuff))
@@ -258,6 +272,7 @@ namespace WOTR_FxTweaks.Config {
                                 mbuff.IsSupported = true;
                             } else
                             {
+                                Main.DebugLog($"Found new unsupported buff. Adding to Buffs and dictionary: {fbuff.Name + ':' + fbuff.Id}");
                                 var nbuff = new Buff
                                 {
                                     Name = fbuff.Name,
@@ -273,6 +288,7 @@ namespace WOTR_FxTweaks.Config {
                                 BuffsByID.Add(nbuff.Id, nbuff);
                             }
                         }
+                        Main.DebugLog("Completed Buffs.json processing.");
                     }
                     catch (Exception e)
                     {

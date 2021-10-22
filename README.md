@@ -45,6 +45,11 @@ As there are approaching 1000 FX that one can configure, users can fully configu
 **A:** FX Tweaks will attempt to protect you from unsupported FX as they can cause the game to crash, and the v1.0.0 version of Buffs.json included definitions for these FX. It will still import these FX, but will flag them as unsupported (you can identify these as they'll have a property of IsSupported = false). By default, FX Tweaks will ignore any unsupported FX. This behavior can be overriden by setting ProcessEvenIfUnsupported to true for any unsupported FX you're sure will not cause a crash (or which you're willing to roll the dice on).
  
 # Change List
+### v1.2.1
+Further hardening against the rare mod-conflict which enables another mod to break FX Tweaks' settings parsing. Die, bug, die.
+
+Additional logging enable better troubleshooting of these types of conflicts.
+
 ### v1.2.0
 **New Feature:** *With many thanks to Bubbles who added this functionality, you can now configure some of the more common tweaks within the in-game Settings-->Graphics menu (scroll to the bottom).* Configuration through Buffs.json will continue to provide much more functionality and flexibility. Note that you **must restart WOTR** for changes to take effect.
 
