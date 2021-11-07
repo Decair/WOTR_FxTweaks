@@ -12,6 +12,8 @@ using Kingmaker.Enums;
 using Kingmaker.UnitLogic.Abilities;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.Abilities.Components;
+using Kingmaker.UnitLogic.Abilities.Components.AreaEffects;
+using Kingmaker.UnitLogic.ActivatableAbilities;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.FactLogic;
 using Kingmaker.UnitLogic.Mechanics;
@@ -46,7 +48,7 @@ namespace WOTR_FxTweaks
                             if (buffToTweak.IsMythicClassFx)
                             {
                                 var BlueprintClassToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>(buffToTweak.Id);
-                                var ClassWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>("0937bec61c0dabc468428f496580c721"); // Using Alchemist which is empty
+                                var ClassWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>("0937bec61c0dabc468428f496580c721"); // Using Alchemist which has no Fx ref
                                 if (buffToTweak.DisableFx)
                                 {
                                     BlueprintClassToTweak.m_AdditionalVisualSettings = ClassWithNullVisualSettingsFx.m_AdditionalVisualSettings;
@@ -71,6 +73,13 @@ namespace WOTR_FxTweaks
                                 }
                             }
                         }
+
+                        // Hardcode disabling Fx in StarlightArea.26a69e73f7d7188439e30aff30e76134
+                        // use Fx in AeonNinthLevelImmunitiesAura.51b89b372ab22d444b3800817593065b as it is Resource::NULL
+                        Main.DebugLog("Tweaking: StarlightArea.26a69e73f7d7188439e30aff30e76134");
+                        var BlueprintAreaEffectToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>("26a69e73f7d7188439e30aff30e76134");
+                        var AreaEffectWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>("51b89b372ab22d444b3800817593065b"); // Using AeonNinthLevelImmunitiesAura which has no Fx ref
+                        BlueprintAreaEffectToTweak.Fx = AreaEffectWithNullVisualSettingsFx.Fx;
                     }
                     catch (Exception e)
                     {
