@@ -2,6 +2,8 @@
 
 WOTR Mod which allows users to disable and to override ongoing effects (FX) of buffs and certain Mythic Classes.
 
+Designed to be minimalistic. Will not impact your save file and can be disabled or removed without side-effects.
+
 By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you don't like this behavior, see How to Use for instructions around how to change this.
 
 # How to Install
@@ -12,13 +14,13 @@ By default the mod disables the BlessingOfUnlife and Stoneskin buff FXs. If you 
 
 # How to Use
 
-A subset of FX Tweaks configuration is now supported in-game within WOTR's Settings-->Graphics menu (scroll to the bottom). You **must restart WOTR** for changes to take effect.
+A subset of FX Tweaks configuration is supported in-game within WOTR's Settings-->Graphics menu (scroll to the bottom). You **must restart WOTR** for changes to take effect.
 
-As there are approaching 1000 FX that one can configure, users can fully configure FX Tweaks through direct editing of the Buffs.json file present in the UserSettings folder of the mod.  To configure via Buffs.json: 
+As there are approaching 1200 FX that one can configure, users can fully configure FX Tweaks through direct editing of the Buffs.json file present in the UserSettings folder of the mod.  To configure via Buffs.json: 
 -  If this is a new install of FX Tweaks (vs. an upgrade), then you will need to launch WOTR prior to Buffs.json being geneterated and available for configuration.
 -  To disable an FX, find the effect whose FX you wish to disable in Buffs.json, and change DisableFx from false to true.
 -  To override an FX with a different FX, first determine the effect whose FX you wish to have displayed in game (we'll call that the override buff) and find that in Buffs.json. Copy the id of the override buff. Then find the effect whose FX you wish to replace in Buffs.json. Paste the id of the override buff into the value of OverrideFxId.
-    -  Only override the FX of a Mythic Class (denoted with "IsMythicClassFx = true", located at the beginning of buffs.json) with the FX of another Mythic Class. Similarly, only override the FX of a normal buff with another normal buff.
+    -  Only override the FX with an effect of the same type. FX from a Mythic Class (denoted with "IsMythicClassFx = true", located at the beginning of buffs.json) can only be overriden with the FX of another Mythic Class. FX from an Area Effect (denoted with "IsAreaEffectFx = true") can only be overriden with the FX of another Area Effect. Normal buffs can only be overriden with the FX of another normal buff.
 -  To add an unsupported buff FX:  
     -  First you'll need the id for the buff (the Toybox mod is a good source for this)
 	-  Then clone an existing buff object in Buffs.json, replacing the Name and Id with the new values
@@ -46,7 +48,9 @@ As there are approaching 1000 FX that one can configure, users can fully configu
  
 # Change List
 ### v1.3.0
-**New Feature:** *You can now disable a number of area effect FXs via Buffs.json.*
+**New Feature:** *You can now disable / override 197 new area effect FXs.* Please consider this experimental and be careful what you disable. There may be area effects in Buffs.json which are used outside of player abilities or equipment, which if disabled, may result in bad behaviors or a crash.
+
+Added a dozen additional buffs into the in-game menu as requested by users (these were previously only configurable through Buffs.json).
 
 ### v1.2.1
 Further hardening against the rare mod-conflict which enables another mod to break FX Tweaks' settings parsing. Die, bug, die.

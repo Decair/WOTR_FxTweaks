@@ -42,13 +42,15 @@ namespace WOTR_FxTweaks
                     Main.Log($"Tweaking {ModSettings.BuffsToTweak.Count} buffs.");
                     try
                     {
+                        var ClassWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>("0937bec61c0dabc468428f496580c721"); // Using Alchemist which has no Fx ref
+                        var AreaEffectWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>("51b89b372ab22d444b3800817593065b"); // Using AeonNinthLevelImmunitiesAura which has no Fx ref
+
                         foreach (Buff buffToTweak in ModSettings.BuffsToTweak)
                         {
                             Main.DebugLog("Tweaking: " + buffToTweak.Name);
                             if (buffToTweak.IsMythicClassFx)
                             {
                                 var BlueprintClassToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>(buffToTweak.Id);
-                                var ClassWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>("0937bec61c0dabc468428f496580c721"); // Using Alchemist which has no Fx ref
                                 if (buffToTweak.DisableFx)
                                 {
                                     BlueprintClassToTweak.m_AdditionalVisualSettings = ClassWithNullVisualSettingsFx.m_AdditionalVisualSettings;
@@ -57,6 +59,19 @@ namespace WOTR_FxTweaks
                                 {
                                     var OverrideBlueprintClass = ResourcesLibrary.TryGetBlueprint<BlueprintCharacterClass>(buffToTweak.OverrideFxId);
                                     BlueprintClassToTweak.m_AdditionalVisualSettings = OverrideBlueprintClass.m_AdditionalVisualSettings;
+                                }
+                            }
+                            else if (buffToTweak.IsAreaEffectFx)
+                            {
+                                var BlueprintAreaEffectToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>(buffToTweak.Id);
+                                if (buffToTweak.DisableFx)
+                                {
+                                    BlueprintAreaEffectToTweak.Fx = AreaEffectWithNullVisualSettingsFx.Fx;
+                                }
+                                else
+                                {
+                                    var OverrideBlueprintAreaEffect = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>(buffToTweak.OverrideFxId);
+                                    BlueprintAreaEffectToTweak.Fx = OverrideBlueprintAreaEffect.Fx;
                                 }
                             }
                             else
@@ -73,13 +88,6 @@ namespace WOTR_FxTweaks
                                 }
                             }
                         }
-
-                        // Hardcode disabling Fx in StarlightArea.26a69e73f7d7188439e30aff30e76134
-                        // use Fx in AeonNinthLevelImmunitiesAura.51b89b372ab22d444b3800817593065b as it is Resource::NULL
-                        Main.DebugLog("Tweaking: StarlightArea.26a69e73f7d7188439e30aff30e76134");
-                        var BlueprintAreaEffectToTweak = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>("26a69e73f7d7188439e30aff30e76134");
-                        var AreaEffectWithNullVisualSettingsFx = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityAreaEffect>("51b89b372ab22d444b3800817593065b"); // Using AeonNinthLevelImmunitiesAura which has no Fx ref
-                        BlueprintAreaEffectToTweak.Fx = AreaEffectWithNullVisualSettingsFx.Fx;
                     }
                     catch (Exception e)
                     {

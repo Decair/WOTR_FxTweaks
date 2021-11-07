@@ -23,6 +23,7 @@ namespace WOTR_FxTweaks.Config {
 		public bool DisableFx {get;set;}
 		public string OverrideFxId {get;set;}
         public bool IsMythicClassFx { get; set; }
+        public bool IsAreaEffectFx { get; set; }
         public bool IsSupported { get; set; }
         public bool ProcessEvenIfUnsupported { get; set; }
         public static int CompareByNameThenGuid(Buff a, Buff b)
@@ -76,9 +77,10 @@ namespace WOTR_FxTweaks.Config {
                     DisableFx = false,
                     OverrideFxId = null,
                     IsMythicClassFx = isClassFX,
+                    IsAreaEffectFx = false,
                     IsSupported = true,
                     ProcessEvenIfUnsupported = false
-                };
+                }; // technically should parse to check IsAreaEffectFx, but really this is never being called so will deal with it if needed
 
                 ModSettings.BuffsByID.Add(id, buff);
             }
@@ -122,6 +124,13 @@ namespace WOTR_FxTweaks.Config {
                         control.m_Description = ModSettings.CreateString($"{setting.Key}.description", $"Disable FX for {displayName}");
                         control.m_TooltipDescription = ModSettings.CreateString($"{displayName}.tooltip-description", $"Disables ongoing visual and audio effects for the {displayName} mythic class.\n\nRequires a game restart to take effect.\n\nFor additional configuration options, see FX Tweaks Readme.md.");
                     }
+                    else if (buff.IsAreaEffectFx)
+                    {
+                        // Prettify the buff name by adding spacing and getting rid of trailing Area
+                        string displayName = Regex.Replace(Regex.Replace(buff.Name, "(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])", " $1"), @" Area$", String.Empty);
+                        control.m_Description = ModSettings.CreateString($"{setting.Key}.description", $"Disable FX for {displayName}");
+                        control.m_TooltipDescription = ModSettings.CreateString($"{setting.Key}.tooltip-description", $"Disables ongoing visual and audio effects for the {displayName} area effect.\n\nRequires a game restart to take effect.\n\nFor additional configuration options, see FX Tweaks Readme.md.");
+                    }
                     else
                     {
                         // Prettify the buff name by adding spacing and getting rid of trailing Buff
@@ -137,7 +146,11 @@ namespace WOTR_FxTweaks.Config {
                 if (classDisables.Length > 0)
                     Game.Instance.UISettingsManager.m_GraphicsSettingsList.Add(MakeSettingsGroup("decair.wotr.fx-tweaks.classes", "FX Tweaks - Mythic Classes", classDisables));
 
-                var buffDisables = ui.Where(tuple => !tuple.buff.IsMythicClassFx).Select(tuple => tuple.control).ToArray();
+                var aoeDisables = ui.Where(tuple => tuple.buff.IsAreaEffectFx).Select(tuple => tuple.control).ToArray();
+                if (aoeDisables.Length > 0)
+                    Game.Instance.UISettingsManager.m_GraphicsSettingsList.Add(MakeSettingsGroup("decair.wotr.fx-tweaks.aoes", "FX Tweaks - Common Area Effects", aoeDisables));
+
+                var buffDisables = ui.Where(tuple => !tuple.buff.IsMythicClassFx && !tuple.buff.IsAreaEffectFx).Select(tuple => tuple.control).ToArray();
                 if (buffDisables.Length > 0)
                     Game.Instance.UISettingsManager.m_GraphicsSettingsList.Add(MakeSettingsGroup("decair.wotr.fx-tweaks.buffs", "FX Tweaks - Common Buffs", buffDisables));
             }
@@ -280,6 +293,7 @@ namespace WOTR_FxTweaks.Config {
                                     DisableFx = fbuff.DisableFx,
                                     OverrideFxId = fbuff.OverrideFxId,
                                     IsMythicClassFx = fbuff.IsMythicClassFx,
+                                    IsAreaEffectFx = fbuff.IsAreaEffectFx,
                                     IsSupported = false,
                                     ProcessEvenIfUnsupported = fbuff.ProcessEvenIfUnsupported
                                 };
@@ -359,26 +373,39 @@ namespace WOTR_FxTweaks.Config {
 
         public static List<string> NativeSettingsToDisable = new List<string>()
         {
-            "15a85e67b7d69554cab9ed5830d0268e",
-            "a5a9fe8f663d701488bd1db8ea40484e",
-            "9a3b2c63afa79744cbca46bea0da9a16",
-            "8e19495ea576a8641964102d177e34b7",
-            "211f49705f478b3468db6daa802452a2",
-            "daf1235b6217787499c14e4e32142523",
-            "5d501618a28bdc24c80007a5c937dcb7",
-            "5295b8e13c2303f4c88bdb3d7760a757",
-            "8df873a8c6e48294abdb78c45834aa0a",
-            "533592a86adecda4e9fd5ed37a028432",
-            "e4e9f9169c9b28e40aa2c9d10c369254",
-            "dd3ad347240624d46a11a092b4dd4674",
-            "00402bae4442a854081264e498e7a833",
-            "8d20b0a6129bd814eb0146041879f38a",
-            "98dc7e7cc6ef59f4abe20c65708ac623",
-            "dea0dba1f7bff064987e03f1307bfa84",
-            "7aeaf147211349b40bb55c57fec8e28d",
-            "6215b25fbc1a36748b5606ebc0092074",
-            "e089f04285f995443a2e295d9b7a40e0",
-            "714244637d461354b85b1808e7c6c814"
+            "15a85e67b7d69554cab9ed5830d0268e", // Aeon
+            "a5a9fe8f663d701488bd1db8ea40484e", // Angel
+            "9a3b2c63afa79744cbca46bea0da9a16", // Azata
+            "8e19495ea576a8641964102d177e34b7", // Demon
+            "211f49705f478b3468db6daa802452a2", // Devil
+            "daf1235b6217787499c14e4e32142523", // GoldenDragon
+            "5d501618a28bdc24c80007a5c937dcb7", // Lich
+            "5295b8e13c2303f4c88bdb3d7760a757", // Swarm
+            "8df873a8c6e48294abdb78c45834aa0a", // Trickster
+            "533592a86adecda4e9fd5ed37a028432", // Barkskin
+            "e4e9f9169c9b28e40aa2c9d10c369254", // BlessingOfUnlife
+            "dd3ad347240624d46a11a092b4dd4674", // Blur
+            "632cad6b7c66b8449a300c6476fd5e1b", // DenyDeath
+            "00402bae4442a854081264e498e7a833", // Displacement
+            "b574e1583768798468335d8cdb77e94c", // FieryBody
+            "082caf8c1005f114ba6375a867f638cf", // GeniekindDjinni
+            "d47f45f29c4cfc0469f3734d02545e0b", // GeniekindEfreeti
+            "4f37fc07fe2cf7f4f8076e79a0a3bfe9", // GeniekindMarid
+            "1d498104f8e35e246b5d8180b0faed43", // GeniekindShaitan
+            "8d20b0a6129bd814eb0146041879f38a", // Haste
+            "a6da7d6a5c9377047a7bd2680912860f", // IceBody
+            "98dc7e7cc6ef59f4abe20c65708ac623", // MirrorImage
+            "e244d6faef3daf747baa5592482a8b79", // NegativeEruption
+            "bb08ad05d0b4505488775090954c2317", // ProfaneNimbus
+            "57b1c6a69c53f4d4ea9baec7d0a3a93a", // SacredNimbus
+            "dea0dba1f7bff064987e03f1307bfa84", // SenseVitals
+            "7aeaf147211349b40bb55c57fec8e28d", // Stoneskin
+            "6215b25fbc1a36748b5606ebc0092074", // StoneskinBuffCL11
+            "e089f04285f995443a2e295d9b7a40e0", // StoneskinBuffLichImproved
+            "714244637d461354b85b1808e7c6c814", // StoneskinCommunal
+            "b2ad92b1b417b4441a457bda918a303f", // ClemencyOfShadowsArea
+            "b21bc337e2beaa74b8823570cd45d6dd", // SiroccoArea
+            "26a69e73f7d7188439e30aff30e76134"  // StarlightArea
         };
     }
 }
