@@ -1,6 +1,6 @@
 # FX Tweaks
 
-WOTR Mod which allows users to disable and to override ongoing effects (FX) of buffs and certain Mythic Classes.
+WOTR Mod which allows users to disable and to override ongoing effects (FX) of buffs, area effects and certain Mythic Classes.
 
 Designed to be minimalistic. Will not impact your save file and can be disabled or removed without side-effects.
 
@@ -33,7 +33,7 @@ As there are approaching 1200 FX that one can configure, users can fully configu
 # Known Issues
 
 -  The new in-game configuration experience is currently limited to english.
--  The mechanism used to filter out non-player buffs (which created the Drezen issue in v1.0.0) may have been too restrictive.  If you notice any missing player buffs in Buffs.json, please create an issue in [github](https://github.com/Decair/WOTR_FxTweaks).  Note that it is intended that the in-game configuration UI does not include every tweakable buff and this won't change (not ever going to list 1000 FX in said UI).
+-  The mechanism used to filter out non-player buffs (which created the Drezen issue in v1.0.0) may have been too restrictive.  If you notice any missing player buffs in Buffs.json, please create an issue in [github](https://github.com/Decair/WOTR_FxTweaks).  Note that it is intended that the in-game configuration UI does not include every tweakable buff and this won't change (not ever going to list 1200 FX in said UI).
 -  There are some visual effects (I'm looking at you Enlarge and Polymorph) which are only partially implemented by Owlcat's buff FX, where the remainder of the effect involves things like changing the base character scale and/or model. Currently FX Tweaks cannot override changes to a character's model or scale. I may add this in the future, but note that the Visual Adjustments mod does give you a ton of control over the visual appearance of your characters and can override any model or scale changes made by spells or abilities.
 
 # Q & A
