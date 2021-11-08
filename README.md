@@ -48,7 +48,7 @@ As there are approaching 1200 FX that one can configure, users can fully configu
  
 # Change List
 ### v1.3.0
-**New Feature:** *You can now disable / override 197 new area effect FXs.* Please consider this experimental and be careful what you disable. There may be area effects in Buffs.json which are used outside of player abilities or equipment, which if disabled, may result in bad behaviors or a crash.
+**New Feature:** *You can now disable / override 197 new area effect FXs.* Please consider this experimental and be selective in what you disable. There may be some area effects in Buffs.json which are not typical player abilities or equipment, which can have side-effects within cut-scenes and events if disabled.
 
 Added a dozen additional buffs into the in-game menu as requested by users (these were previously only configurable through Buffs.json).
 
